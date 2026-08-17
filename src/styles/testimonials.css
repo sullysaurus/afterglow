@@ -1,0 +1,209 @@
+.testimonials-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(90px, 10vw, 160px) clamp(24px, 6vw, 100px);
+  border-top: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 92% 15%, rgba(255, 79, 163, .13), transparent 28rem),
+    #121019;
+}
+
+.testimonials-section::after {
+  position: absolute;
+  right: -60px;
+  bottom: -220px;
+  color: rgba(255, 255, 255, .025);
+  content: "“";
+  font: 600 650px/.7 Georgia, serif;
+  pointer-events: none;
+}
+
+.testimonials-heading {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: .65fr 1.5fr 1fr;
+  gap: 4vw;
+  align-items: end;
+  margin-bottom: 70px;
+}
+
+.testimonials-heading .eyebrow {
+  color: var(--lime);
+}
+
+.testimonials-heading h2 {
+  margin: 0;
+  font: 600 clamp(36px, 4.8vw, 72px)/1.02 var(--display);
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+
+.testimonials-heading h2 i {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.testimonials-heading > p:last-child {
+  margin: 0;
+  color: rgba(255, 255, 255, .5);
+  font: 10px/1.65 var(--mono);
+  text-transform: uppercase;
+}
+
+.testimonial-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(18px, 2.5vw, 38px);
+  align-items: start;
+}
+
+.testimonial-card {
+  position: relative;
+  min-height: 430px;
+  padding: clamp(28px, 4vw, 56px);
+  border: 1px solid var(--line);
+  background: var(--ink);
+}
+
+.testimonial-pink {
+  margin-top: 70px;
+  box-shadow: 12px 12px 0 var(--pink);
+}
+
+.testimonial-lime {
+  box-shadow: -12px 12px 0 var(--lime);
+}
+
+.testimonial-mark {
+  position: absolute;
+  right: 30px;
+  top: 12px;
+  color: rgba(255, 255, 255, .08);
+  font: 600 150px/1 Georgia, serif;
+}
+
+.testimonial-status {
+  position: relative;
+  width: max-content;
+  margin: 0 0 36px;
+  padding: 8px 10px;
+  border: 1px dashed rgba(255, 255, 255, .3);
+  color: rgba(255, 255, 255, .58);
+  font: 500 9px var(--mono);
+  letter-spacing: .1em;
+}
+
+.testimonial-card blockquote {
+  position: relative;
+  max-width: 720px;
+  margin: 0;
+  font: 400 clamp(22px, 2.2vw, 34px)/1.38 Georgia, serif;
+}
+
+.quote-placeholder {
+  color: var(--lime);
+  font-family: var(--mono);
+  font-size: .66em;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.testimonial-person {
+  display: flex;
+  grid-template-columns: none;
+  align-items: center;
+  gap: 16px;
+  margin-top: 46px;
+  padding: 0;
+}
+
+.testimonial-avatar {
+  width: 58px;
+  height: 58px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .5);
+  border-radius: 50%;
+  background:
+    linear-gradient(135deg, rgba(255, 79, 163, .45), rgba(217, 255, 82, .12)),
+    var(--ink);
+  color: #fff;
+  font: 600 13px var(--display);
+}
+
+.testimonial-avatar-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.testimonial-person > div:last-child {
+  display: block;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+.testimonial-person strong,
+.testimonial-person span {
+  display: block;
+}
+
+.testimonial-person strong {
+  font: 600 13px var(--display);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.testimonial-person span {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, .5);
+  font: 10px var(--mono);
+}
+
+@media (max-width: 850px) {
+  .testimonials-heading {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .testimonials-heading > p:last-child {
+    max-width: 560px;
+  }
+
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-card {
+    min-height: 0;
+  }
+
+  .testimonial-pink {
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .testimonial-card {
+    padding: 28px 24px;
+  }
+
+  .testimonial-lime {
+    box-shadow: -7px 7px 0 var(--lime);
+  }
+
+  .testimonial-pink {
+    box-shadow: 7px 7px 0 var(--pink);
+  }
+
+  .testimonial-status {
+    width: auto;
+    margin-right: 55px;
+    line-height: 1.45;
+  }
+}
