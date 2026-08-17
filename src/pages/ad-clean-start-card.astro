@@ -1,0 +1,52 @@
+---
+const groups = [
+  { label: 'BOOKINGS', tools: 'HoneyBook  +  Check Cherry', tone: 'pink' },
+  { label: 'MARKETING', tools: 'Google Ads  +  Analytics  +  Search', tone: 'lime' },
+  { label: 'FOLLOW-UP', tools: 'Email  +  SMS', tone: 'aqua' },
+  { label: 'MONEY', tools: 'QuickBooks', tone: 'coral' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Afterglow Clean Ad Start</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Unbounded:wght@600;700&display=swap');
+      * { box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+      astro-dev-toolbar { display: none !important; }
+      body { color: #f7f3ec; background: #08060b; }
+      main {
+        position: relative; width: 100vw; height: 100vh; overflow: hidden;
+        padding: 13vh 6.7vw 15vh;
+        background: radial-gradient(circle at 50% 52%, rgba(255,79,163,.2), transparent 31%), radial-gradient(circle at 8% 17%, rgba(120,228,211,.1), transparent 24%), #08060b;
+      }
+      main::before { content:''; position:absolute; inset:0; opacity:.1; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E"); }
+      .eyebrow { margin:0; color:#d9ff52; font:500 2vw/1 'DM Mono', monospace; letter-spacing:.14em; }
+      h1 { margin:2.5vh 0 0; font:700 8.8vw/.94 'Unbounded', sans-serif; letter-spacing:-.07em; text-transform:uppercase; }
+      h1 i { display:block; color:#ff4fa3; font:italic 400 9.8vw/.9 Georgia, serif; text-transform:none; }
+      .map { position:absolute; z-index:2; top:38vh; right:6.7vw; left:6.7vw; display:grid; gap:2vh; }
+      .group { --accent:#ff4fa3; position:relative; padding:2.2vh 4vw; border:1px solid color-mix(in srgb,var(--accent) 60%,transparent); background:rgba(16,13,21,.9); }
+      .group::after { content:'→'; position:absolute; right:4vw; top:50%; color:var(--accent); font:500 3vw/1 'DM Mono', monospace; transform:translateY(-50%); }
+      .group b { display:block; margin-bottom:.8vh; color:var(--accent); font:500 1.65vw/1 'DM Mono', monospace; letter-spacing:.13em; }
+      .group span { font:600 3.1vw/1.1 'Unbounded', sans-serif; letter-spacing:-.04em; }
+      .pink{--accent:#ff4fa3}.lime{--accent:#d9ff52}.aqua{--accent:#78e4d3}.coral{--accent:#ff6a3d}
+      .core { position:absolute; right:6.7vw; bottom:15vh; left:6.7vw; display:flex; align-items:center; justify-content:space-between; padding-top:2.2vh; border-top:1px solid rgba(255,255,255,.25); }
+      .core strong { font:700 5.2vw/1 'Unbounded', sans-serif; }
+      .core strong span { color:#d9ff52; }
+      .core small { color:rgba(255,255,255,.65); font:500 1.7vw/1 'DM Mono', monospace; letter-spacing:.1em; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">YOUR BUSINESS ISN’T THE PROBLEM.</p>
+      <h1>Your tools need<i>one brain.</i></h1>
+      <section class="map">{groups.map((group) => <article class={`group ${group.tone}`}><b>{group.label}</b><span>{group.tools}</span></article>)}</section>
+      <footer class="core"><strong>A<span>✦</span></strong><small>EVERYTHING → AFTERGLOW</small></footer>
+    </main>
+  </body>
+</html>
