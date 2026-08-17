@@ -67,6 +67,93 @@ const channels = [
 ];
 
 const connectors = sourceGroups.flatMap((group) => group.tools.map((tool) => ({ ...tool, group: group.label, tone: group.tone })));
+
+const deepDives = [
+  {
+    id: 'search', mark: 'SC', name: 'Search Console', eyebrow: 'ORGANIC DEMAND', tone: 'lime',
+    summary: 'Turn rankings and queries into content priorities and attributed inquiries.',
+    metrics: [['Impressions', '18.4k'], ['Organic clicks', '486'], ['Avg. position', '12.7'], ['Attributed inquiries', '23']],
+    flow: ['SEARCH QUERY', 'LANDING PAGE', 'INQUIRY', 'BOOKED REVENUE'],
+    rows: [
+      ['photo booth rental austin', '1,240 imp.', '4.8', '+3'],
+      ['corporate event photo booth', '892 imp.', '7.2', '+5'],
+      ['360 photo booth rental', '714 imp.', '11.4', '+8'],
+      ['wedding photo booth packages', '633 imp.', '14.1', '+6'],
+    ],
+    columns: ['OPPORTUNITY', 'DEMAND', 'POSITION', 'CHANGE'],
+    automations: ['Nightly query and page sync', 'High-impression opportunity alerts', 'Content brief and refresh queue', 'Organic inquiry-to-revenue attribution'],
+  },
+  {
+    id: 'analytics', mark: 'GA', name: 'Google Analytics', eyebrow: 'WEBSITE BEHAVIOR', tone: 'aqua',
+    summary: 'See which journeys create inquiries instead of stopping at traffic reports.',
+    metrics: [['Visitors', '1,842'], ['Engaged sessions', '1,106'], ['Inquiry starts', '94'], ['Lead conversion', '3.7%']],
+    flow: ['VISITOR', 'SERVICE PAGE', 'FORM START', 'QUALIFIED LEAD'],
+    rows: [
+      ['Organic search', '684 sessions', '4.2%', '29 leads'],
+      ['Google Ads', '446 sessions', '3.6%', '16 leads'],
+      ['Instagram', '318 sessions', '1.9%', '6 leads'],
+      ['Referral partners', '206 sessions', '4.4%', '9 leads'],
+    ],
+    columns: ['CHANNEL', 'TRAFFIC', 'CVR', 'OUTCOME'],
+    automations: ['Cross-domain event tracking', 'Form and phone conversion capture', 'Landing-page drop-off alerts', 'CRM source reconciliation'],
+  },
+  {
+    id: 'ads', mark: 'AD', name: 'Google Ads', eyebrow: 'PAID DEMAND', tone: 'orange',
+    summary: 'Connect spend and search terms to qualified leads, bookings, and real revenue.',
+    metrics: [['Ad spend', '$4,820'], ['Qualified leads', '16'], ['Bookings', '5'], ['Booked ROAS', '5.9×']],
+    flow: ['SEARCH TERM', 'AD CLICK', 'QUALIFIED LEAD', 'BOOKING'],
+    rows: [
+      ['Corporate events · Search', '$1,640', '7 leads', '7.4×'],
+      ['Wedding services · Search', '$1,390', '5 leads', '5.8×'],
+      ['Brand protection', '$610', '3 leads', '8.1×'],
+      ['Remarketing', '$1,180', '1 lead', '1.9×'],
+    ],
+    columns: ['CAMPAIGN', 'SPEND', 'LEADS', 'ROAS'],
+    automations: ['Daily budget pacing and alerts', 'Search-term waste review', 'Offline booking conversion uploads', 'Approval-gated bid and budget changes'],
+  },
+  {
+    id: 'crm', mark: 'CR', name: 'CRM + Bookings', eyebrow: 'SALES PIPELINE', tone: 'pink',
+    summary: 'Unify HoneyBook, Check Cherry, Dubsado, or Tripleseat around the next move.',
+    metrics: [['New leads', '47'], ['Needs response', '4'], ['Proposals viewed', '7'], ['Booked revenue', '$84.6k']],
+    flow: ['INQUIRY', 'QUALIFIED', 'PROPOSAL', 'BOOKED'],
+    rows: [
+      ['Corporate holiday party', 'Proposal viewed', '$6,800', 'Follow up'],
+      ['Hill Country wedding', 'Qualified', '$4,200', 'Build proposal'],
+      ['University activation', 'New inquiry', '$9,500', 'First response'],
+      ['Brand launch', 'Contract sent', '$7,100', 'Await signature'],
+    ],
+    columns: ['OPPORTUNITY', 'STAGE', 'VALUE', 'NEXT MOVE'],
+    automations: ['Lead normalization and deduping', 'Response-time and follow-up alerts', 'Proposal-viewed triggers', 'Source-to-booking attribution'],
+  },
+  {
+    id: 'finance', mark: 'QB', name: 'QuickBooks + Payments', eyebrow: 'CASH POSITION', tone: 'lime',
+    summary: 'Put collected cash, open invoices, and past-due balances beside booked work.',
+    metrics: [['Invoiced', '$84.6k'], ['Collected', '$52.9k'], ['Outstanding', '$31.7k'], ['Past due', '$12.4k']],
+    flow: ['CONTRACT', 'INVOICE', 'PAYMENT', 'RECONCILED'],
+    rows: [
+      ['Current', '12 invoices', '$18,420', 'Healthy'],
+      ['1–15 days', '4 invoices', '$7,860', 'Reminder queued'],
+      ['16–30 days', '2 invoices', '$4,120', 'Owner review'],
+      ['30+ days', '1 invoice', '$1,300', 'Escalate'],
+    ],
+    columns: ['AGING', 'VOLUME', 'BALANCE', 'STATUS'],
+    automations: ['Invoice and payment synchronization', 'Past-due owner alerts', 'Deposit reconciliation checks', 'Cash collection forecast'],
+  },
+  {
+    id: 'operations', mark: 'OP', name: 'Calendar + Operations', eyebrow: 'DELIVERY CONTROL', tone: 'aqua',
+    summary: 'See upcoming events, staffing, equipment, and conflicts before event day.',
+    metrics: [['Next 30 days', '18 events'], ['Peak capacity', '86%'], ['Staffing gaps', '2'], ['Conflicts', '1']],
+    flow: ['BOOKING', 'CALENDAR', 'STAFF + GEAR', 'EVENT READY'],
+    rows: [
+      ['Aug 22 · Brand activation', '4 crew', 'Ready', '100%'],
+      ['Aug 24 · Wedding', '3 crew', 'Confirm driver', '82%'],
+      ['Aug 29 · Corporate gala', '6 crew', 'Gear conflict', '68%'],
+      ['Sep 02 · University event', '5 crew', 'Ready', '94%'],
+    ],
+    columns: ['EVENT', 'STAFF', 'RISK', 'READY'],
+    automations: ['CRM-to-calendar synchronization', 'Capacity and overlap detection', 'Staffing reminder workflows', 'Event-ready Slack briefings'],
+  },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -173,6 +260,22 @@ const connectors = sourceGroups.flatMap((group) => group.tools.map((tool) => ({ 
             ))}
           </section>
 
+          <section class="deep-dive-launcher tour-target" aria-labelledby="deep-dive-title" data-tour="Open any system for a focused screen-recording walkthrough">
+            <div class="panel-heading">
+              <div><p class="micro-label">SYSTEM DEEP DIVES</p><h2 id="deep-dive-title">Click a source. Open the build.</h2></div>
+              <p class="registry-copy">Six focused views built for zooming, explaining, and recording.</p>
+            </div>
+            <div class="deep-dive-grid">
+              {deepDives.map((panel) => (
+                <button class={`deep-dive-card deep-dive-${panel.tone}`} type="button" data-open-panel={panel.id}>
+                  <span>{panel.mark}</span>
+                  <div><small>{panel.eyebrow}</small><strong>{panel.name}</strong><p>{panel.summary}</p></div>
+                  <b>OPEN VIEW ↗</b>
+                </button>
+              ))}
+            </div>
+          </section>
+
           <div class="lower-grid">
             <section class="action-panel tour-target" id="actions" data-tour="The dashboard turns information into ranked next moves">
               <div class="panel-heading compact">
@@ -240,6 +343,42 @@ const connectors = sourceGroups.flatMap((group) => group.tools.map((tool) => ({ 
       </main>
     </div>
 
+    {deepDives.map((panel) => (
+      <dialog class={`system-dialog system-dialog-${panel.tone}`} id={`panel-${panel.id}`}>
+        <div class="dialog-shell">
+          <header class="dialog-header">
+            <div class="dialog-title">
+              <span class="dialog-mark">{panel.mark}</span>
+              <div><p>{panel.eyebrow} · CONNECTED VIEW</p><h2>{panel.name}</h2></div>
+            </div>
+            <div class="dialog-actions"><span><i class="status-pulse"></i>LIVE DEMO DATA</span><button type="button" data-close-panel aria-label={`Close ${panel.name} panel`}>×</button></div>
+          </header>
+          <div class="dialog-body">
+            <div class="dialog-intro"><div><p class="micro-label">AFTERGLOW DEEP DIVE</p><h3>{panel.summary}</h3></div><span>LAST 30 DAYS</span></div>
+            <div class="dialog-metrics">
+              {panel.metrics.map(([label, value]) => <article><p>{label}</p><strong>{value}</strong></article>)}
+            </div>
+            <div class="dialog-flow">
+              {panel.flow.map((step, index) => <><span>{step}</span>{index < panel.flow.length - 1 && <i>→</i>}</>)}
+            </div>
+            <div class="dialog-detail-grid">
+              <section class="dialog-table">
+                <div class="dialog-section-heading"><div><p class="micro-label">LIVE SIGNALS</p><h4>What the owner can act on</h4></div><span>AUTO-REFRESHED</span></div>
+                <div class="table-head">{panel.columns.map((column) => <span>{column}</span>)}</div>
+                {panel.rows.map((row) => <div class="table-row">{row.map((cell, index) => index === 0 ? <strong>{cell}</strong> : <span>{cell}</span>)}</div>)}
+              </section>
+              <aside class="automation-panel">
+                <p class="micro-label">WHAT AFTERGLOW AUTOMATES</p>
+                <h4>From connected data to next action.</h4>
+                <ol>{panel.automations.map((automation, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{automation}<i>✓</i></li>)}</ol>
+                <div class="automation-footer"><i class="status-pulse"></i><span>MONITORED CONTINUOUSLY<small>Failures surface before reporting drifts</small></span></div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </dialog>
+    ))}
+
     <div class="tour-toast" role="status" aria-live="polite"><span>01</span><p>One clear answer before the day gets busy</p></div>
 
     <script>
@@ -270,6 +409,21 @@ const connectors = sourceGroups.flatMap((group) => group.tools.map((tool) => ({ 
         toast?.classList.add('visible');
         if (tourButtonLabel) tourButtonLabel.textContent = tourIndex === targets.length - 1 ? 'Restart guided tour' : 'Next highlight';
       });
+
+      document.querySelectorAll('[data-open-panel]').forEach((button) => button.addEventListener('click', () => {
+        const id = button.getAttribute('data-open-panel');
+        const dialog = document.querySelector(`#panel-${id}`);
+        if (dialog instanceof HTMLDialogElement) dialog.showModal();
+      }));
+
+      document.querySelectorAll('[data-close-panel]').forEach((button) => button.addEventListener('click', () => {
+        const dialog = button.closest('dialog');
+        if (dialog instanceof HTMLDialogElement) dialog.close();
+      }));
+
+      document.querySelectorAll('.system-dialog').forEach((dialog) => dialog.addEventListener('click', (event) => {
+        if (event.target === dialog && dialog instanceof HTMLDialogElement) dialog.close();
+      }));
     </script>
   </body>
 </html>
