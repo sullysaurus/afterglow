@@ -86,21 +86,10 @@
   font: 600 150px/1 Georgia, serif;
 }
 
-.testimonial-status {
-  position: relative;
-  width: max-content;
-  margin: 0 0 36px;
-  padding: 8px 10px;
-  border: 1px dashed rgba(255, 255, 255, .3);
-  color: rgba(255, 255, 255, .58);
-  font: 500 9px var(--mono);
-  letter-spacing: .1em;
-}
-
 .testimonial-card blockquote {
   position: relative;
   max-width: 720px;
-  margin: 0;
+  margin: 28px 0 0;
   font: 400 clamp(22px, 2.2vw, 34px)/1.38 Georgia, serif;
 }
 
@@ -193,9 +182,4 @@
     box-shadow: 7px 7px 0 var(--pink);
   }
 
-  .testimonial-status {
-    width: auto;
-    margin-right: 55px;
-    line-height: 1.45;
-  }
 }
