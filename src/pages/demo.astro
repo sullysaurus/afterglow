@@ -381,6 +381,28 @@ const deepDives = [
 
     <div class="tour-toast" role="status" aria-live="polite"><span>01</span><p>One clear answer before the day gets busy</p></div>
 
+    <div class="presentation-ready" aria-hidden="true">
+      <div class="presentation-ready-card">
+        <p>AFTERGLOW / DIRECTOR MODE</p>
+        <h2>Ready when<br/><em>you are.</em></h2>
+        <span>80-second automated dashboard walkthrough</span>
+        <button type="button" data-presentation-start><i></i>Start presentation</button>
+        <small>PRESS SPACE TO START · NO MOUSE REQUIRED</small>
+      </div>
+    </div>
+
+    <div class="presentation-caption" aria-live="polite" aria-hidden="true">
+      <div class="presentation-chapter"><span>01</span><i></i><small>THE OWNER VIEW</small></div>
+      <h2>Your whole business.<br/><em>Finally in sync.</em></h2>
+      <p>One owner view for leads, marketing, money, and delivery.</p>
+    </div>
+
+    <div class="presentation-controls" aria-hidden="true">
+      <button type="button" data-presentation-toggle aria-label="Pause presentation">Ⅱ</button>
+      <div><span data-presentation-status>PLAYING</span><i><b data-presentation-progress></b></i><small><span data-presentation-time>00:00</span> / 01:20</small></div>
+      <button type="button" data-presentation-restart aria-label="Restart presentation">↺</button>
+    </div>
+
     <script>
       const periodButtons = document.querySelectorAll('[data-period]');
       const periodLabel = document.querySelector('.period-label b');
@@ -424,6 +446,150 @@ const deepDives = [
       document.querySelectorAll('.system-dialog').forEach((dialog) => dialog.addEventListener('click', (event) => {
         if (event.target === dialog && dialog instanceof HTMLDialogElement) dialog.close();
       }));
+
+      const presentationParams = new URLSearchParams(window.location.search);
+      const presentationQuery = presentationParams.get('presentation') === '1';
+      const presentationSpeed = Math.max(0.05, Number(presentationParams.get('speed')) || 1);
+      const readyScreen = document.querySelector('.presentation-ready');
+      const presentationCaption = document.querySelector('.presentation-caption');
+      const presentationChapter = presentationCaption?.querySelector('.presentation-chapter span');
+      const presentationKicker = presentationCaption?.querySelector('.presentation-chapter small');
+      const presentationTitle = presentationCaption?.querySelector('h2');
+      const presentationCopy = presentationCaption?.querySelector('p');
+      const presentationControls = document.querySelector('.presentation-controls');
+      const presentationToggle = document.querySelector('[data-presentation-toggle]');
+      const presentationProgress = document.querySelector('[data-presentation-progress]');
+      const presentationTime = document.querySelector('[data-presentation-time]');
+      const presentationStatus = document.querySelector('[data-presentation-status]');
+
+      const presentationSteps = [
+        { duration: 8000 * presentationSpeed, target: '#overview', kicker: 'THE OWNER VIEW', title: 'Your whole business.<br/><em>Finally in sync.</em>', copy: 'One owner view for leads, marketing, money, and delivery.', tone: 'pink', hero: true },
+        { duration: 10000 * presentationSpeed, target: '#signals', kicker: 'KEEP THE TOOLS THAT WORK', title: 'Connected.<br/><em>Without starting over.</em>', copy: 'Your CRM, payments, advertising, analytics, and operations become one useful signal layer.', tone: 'lime' },
+        { duration: 14000 * presentationSpeed, panel: 'crm', kicker: 'RESPOND + CONVERT', title: 'Stop letting valuable<br/><em>leads go quiet.</em>', copy: 'Surface new inquiries, proposal activity, response gaps, and the next move before revenue gets stuck.', tone: 'pink' },
+        { duration: 14000 * presentationSpeed, panel: 'ads', kicker: 'SPEND → REVENUE', title: 'Know which ads<br/><em>create bookings.</em>', copy: 'Connect campaigns to qualified leads and booked revenue—not just clicks and form fills.', tone: 'orange' },
+        { duration: 14000 * presentationSpeed, panel: 'search', kicker: 'SEARCH → CONTENT', title: 'Turn demand into<br/><em>a content plan.</em>', copy: 'Find pages close to ranking, prioritize the right work, and attribute organic traffic to real inquiries.', tone: 'lime' },
+        { duration: 10000 * presentationSpeed, target: '#actions', kicker: 'THE NEXT BEST MOVE', title: 'Know what needs<br/><em>attention now.</em>', copy: 'Afterglow turns scattered information into ranked actions, alerts, and automated follow-through.', tone: 'aqua' },
+        { duration: 10000 * presentationSpeed, target: '#overview', kicker: 'BUILT AROUND YOUR BUSINESS', title: 'You run the events.<br/><em>Afterglow connects the rest.</em>', copy: 'Send me your software stack. I’ll show you what I would connect first.', tone: 'pink', hero: true },
+      ];
+
+      let presentationIndex = 0;
+      let presentationElapsed = 0;
+      let presentationStartedAt = 0;
+      let presentationTimer = 0;
+      let presentationFrame = 0;
+      let presentationPaused = false;
+      let presentationRemaining = 0;
+      const presentationTotal = presentationSteps.reduce((total, step) => total + step.duration, 0);
+
+      const closePresentationDialogs = () => {
+        document.querySelectorAll('.system-dialog[open]').forEach((dialog) => {
+          if (dialog instanceof HTMLDialogElement) dialog.close();
+        });
+        document.body.classList.remove('presentation-dialog-open');
+      };
+
+      const formatPresentationTime = (milliseconds) => {
+        const seconds = Math.floor(milliseconds / 1000);
+        return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+      };
+
+      const updatePresentationProgress = () => {
+        if (!presentationStartedAt || presentationPaused) return;
+        const currentStepElapsed = Math.min(Date.now() - presentationStartedAt, presentationSteps[presentationIndex].duration);
+        const elapsed = presentationElapsed + currentStepElapsed;
+        if (presentationProgress instanceof HTMLElement) presentationProgress.style.width = `${Math.min(100, elapsed / presentationTotal * 100)}%`;
+        if (presentationTime) presentationTime.textContent = formatPresentationTime(elapsed);
+        presentationFrame = window.requestAnimationFrame(updatePresentationProgress);
+      };
+
+      const showPresentationStep = (index, remainingDuration) => {
+        window.clearTimeout(presentationTimer);
+        window.cancelAnimationFrame(presentationFrame);
+        closePresentationDialogs();
+        presentationIndex = index;
+        const step = presentationSteps[index];
+        document.body.dataset.presentationTone = step.tone;
+        presentationCaption?.classList.toggle('is-hero', Boolean(step.hero));
+        presentationCaption?.classList.remove('is-visible');
+
+        if (step.target) document.querySelector(step.target)?.scrollIntoView({ behavior: index === 0 ? 'auto' : 'smooth', block: step.target === '#actions' ? 'center' : 'start' });
+        if (step.panel) {
+          const dialog = document.querySelector(`#panel-${step.panel}`);
+          if (dialog instanceof HTMLDialogElement) {
+            dialog.show();
+            document.body.classList.add('presentation-dialog-open');
+          }
+        }
+
+        if (presentationChapter) presentationChapter.textContent = String(index + 1).padStart(2, '0');
+        if (presentationKicker) presentationKicker.textContent = step.kicker;
+        if (presentationTitle) presentationTitle.innerHTML = step.title;
+        if (presentationCopy) presentationCopy.textContent = step.copy;
+        window.setTimeout(() => presentationCaption?.classList.add('is-visible'), 220);
+
+        presentationRemaining = remainingDuration ?? step.duration;
+        presentationStartedAt = Date.now();
+        presentationTimer = window.setTimeout(() => {
+          presentationElapsed += presentationRemaining;
+          if (index < presentationSteps.length - 1) showPresentationStep(index + 1);
+          else {
+            presentationCaption?.classList.add('is-finished');
+            presentationPaused = true;
+            presentationStartedAt = 0;
+            if (presentationProgress instanceof HTMLElement) presentationProgress.style.width = '100%';
+            if (presentationTime) presentationTime.textContent = formatPresentationTime(presentationTotal);
+            if (presentationStatus) presentationStatus.textContent = 'FINISHED';
+            if (presentationToggle) presentationToggle.textContent = '▶';
+          }
+        }, presentationRemaining);
+        presentationFrame = window.requestAnimationFrame(updatePresentationProgress);
+      };
+
+      const startPresentation = () => {
+        readyScreen?.classList.add('is-hidden');
+        presentationCaption?.setAttribute('aria-hidden', 'false');
+        presentationControls?.setAttribute('aria-hidden', 'false');
+        presentationPaused = false;
+        presentationElapsed = 0;
+        presentationCaption?.classList.remove('is-finished');
+        if (presentationStatus) presentationStatus.textContent = 'PLAYING';
+        if (presentationToggle) presentationToggle.textContent = 'Ⅱ';
+        showPresentationStep(0);
+      };
+
+      const togglePresentation = () => {
+        if (!presentationStartedAt) return startPresentation();
+        if (!presentationPaused) {
+          const stepElapsed = Math.min(Date.now() - presentationStartedAt, presentationSteps[presentationIndex].duration);
+          presentationRemaining = Math.max(0, presentationRemaining - stepElapsed);
+          presentationElapsed += stepElapsed;
+          presentationPaused = true;
+          window.clearTimeout(presentationTimer);
+          window.cancelAnimationFrame(presentationFrame);
+          if (presentationStatus) presentationStatus.textContent = 'PAUSED';
+          if (presentationToggle) presentationToggle.textContent = '▶';
+        } else {
+          presentationPaused = false;
+          if (presentationStatus) presentationStatus.textContent = 'PLAYING';
+          if (presentationToggle) presentationToggle.textContent = 'Ⅱ';
+          showPresentationStep(presentationIndex, presentationRemaining);
+        }
+      };
+
+      if (presentationQuery) {
+        document.body.classList.add('presentation-mode');
+        readyScreen?.setAttribute('aria-hidden', 'false');
+        document.querySelector('[data-presentation-start]')?.addEventListener('click', startPresentation);
+        presentationToggle?.addEventListener('click', togglePresentation);
+        document.querySelector('[data-presentation-restart]')?.addEventListener('click', startPresentation);
+        window.addEventListener('keydown', (event) => {
+          if (event.code === 'Space' && !(event.target instanceof HTMLInputElement) && !(event.target instanceof HTMLTextAreaElement)) {
+            event.preventDefault();
+            togglePresentation();
+          }
+          if (event.key.toLowerCase() === 'r') startPresentation();
+        });
+      }
     </script>
   </body>
 </html>
