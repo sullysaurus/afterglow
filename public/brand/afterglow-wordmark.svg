@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 210" role="img" aria-labelledby="title desc">
+  <title id="title">Afterglow</title><desc id="desc">AI command centers for event businesses</desc>
+  <rect width="920" height="210" rx="18" fill="#0b0810"/>
+  <g transform="translate(34 38) scale(1.05)">
+    <rect x="2" y="2" width="124" height="124" rx="12" fill="none" stroke="#f4f0e7" stroke-width="4"/>
+    <path d="M27 98 50 35h18l23 63H75l-5-15H47l-5 15H27Zm25-29h14L59 47l-7 22Z" fill="#ff4fa3"/>
+    <path d="m99 17 3.5 10.5L113 31l-10.5 3.5L99 45l-3.5-10.5L85 31l10.5-3.5L99 17Z" fill="#d9ff52"/>
+  </g>
+  <text x="190" y="104" fill="#f4f0e7" font-family="Impact, Arial Black, sans-serif" font-size="76" letter-spacing="2">AFTERGLOW</text>
+  <text x="194" y="145" fill="#ff4fa3" font-family="Courier New, monospace" font-size="18" font-weight="700" letter-spacing="5">AI COMMAND CENTERS FOR EVENT BUSINESSES</text>
+</svg>

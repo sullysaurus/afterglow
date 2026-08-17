@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b0810" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/brand/afterglow-social-share.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Afterglow — AI command centers for event businesses" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/brand/afterglow-social-share.png" />
+    <link rel="icon" href="/brand/afterglow-mark.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="logo" href="/" aria-label="Afterglow Automations home">
+        <span class="logo-mark">A<span>✦</span></span><span>AFTERGLOW<br/><em>AUTOMATIONS</em></span>
+      </a>
+      <button class="menu-button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" aria-label="Main navigation">
+        <a href="/#work">The work</a><a href="/#services">The command center</a><a href="/#process">How it works</a>
+        <a class="nav-cta" href="/#contact">Let’s talk <span>↗</span></a>
+      </nav>
+    </header>
+    <main><slot /></main>
+    <footer>
+      <div class="logo footer-logo"><span class="logo-mark">A<span>✦</span></span><span>AFTERGLOW<br/><em>AUTOMATIONS</em></span></div>
+      <p>AI systems for businesses that make the party happen.</p>
+      <div><span>Raleigh, NC</span><span>Working with event companies everywhere</span></div>
+    </footer>
+    <script>
+      const button = document.querySelector('.menu-button');
+      const nav = document.querySelector('#site-nav');
+      button?.addEventListener('click', () => {
+        const open = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!open)); nav?.classList.toggle('open', !open);
+      });
+      nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); button?.setAttribute('aria-expanded', 'false'); }));
+      const observer = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('revealed')), { threshold: .12 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
