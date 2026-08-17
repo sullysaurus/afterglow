@@ -1,0 +1,155 @@
+---
+const tools = ['CRM', 'ADS', 'SEO', 'CONTENT', 'EMAIL', 'REVENUE'];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Afterglow Automations Ad End Card</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Manrope:wght@500;700&family=Unbounded:wght@600;700&display=swap');
+
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+      astro-dev-toolbar { display: none !important; }
+      body { background: #09070c; color: #f7f3ec; }
+      .card {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        min-height: 100vh;
+        overflow: hidden;
+        padding: 7.4vh 6.7vw 5.5vh;
+        background:
+          radial-gradient(circle at 82% 7%, rgba(255,79,163,.22), transparent 25%),
+          radial-gradient(circle at 14% 72%, rgba(120,200,255,.13), transparent 31%),
+          #09070c;
+      }
+      .card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: .12;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitchTiles'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 2.3vw;
+        font: 600 2.1vw/1 'Unbounded', sans-serif;
+        letter-spacing: .08em;
+      }
+      .mark {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 8.2vw;
+        aspect-ratio: 1;
+        border: 1px solid rgba(255,255,255,.75);
+        font-size: 4.2vw;
+      }
+      .mark span { position: absolute; right: .5vw; top: .2vw; color: #d9ff52; font-size: 2vw; }
+      .brand em { color: #ff4fa3; font-style: normal; }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 2vw;
+        margin: 5.5vh 0 2.1vh;
+        color: #d9ff52;
+        font: 500 1.9vw/1 'DM Mono', monospace;
+        letter-spacing: .14em;
+      }
+      .eyebrow::before { content: ''; width: 7vw; border-top: 2px solid #d9ff52; }
+      h1 {
+        max-width: 87vw;
+        margin: 0;
+        font: 700 8.2vw/.93 'Unbounded', sans-serif;
+        letter-spacing: -.065em;
+        text-transform: uppercase;
+      }
+      h1 i { color: #ff4fa3; font: italic 400 9.5vw/.88 Georgia, serif; text-transform: none; }
+      .dashboard {
+        position: relative;
+        z-index: 2;
+        margin: 4.5vh -1.5vw 3.7vh;
+        padding: 1.5vw;
+        border: 2px solid #ff4fa3;
+        background: #0e0c13;
+        box-shadow: 0 0 8vw rgba(255,79,163,.2);
+        transform: rotate(-1.2deg);
+      }
+      .dashboard::after {
+        content: 'LIVE OWNER VIEW';
+        position: absolute;
+        right: -1.8vw;
+        bottom: -2vh;
+        padding: 1.2vh 2.6vw;
+        background: #d9ff52;
+        color: #09070c;
+        font: 600 1.7vw/1 'DM Mono', monospace;
+        letter-spacing: .08em;
+      }
+      .dashboard img {
+        display: block;
+        width: 100%;
+        height: 39vh;
+        object-fit: cover;
+        object-position: top center;
+      }
+      .tool-row { display: flex; justify-content: space-between; gap: 1vw; margin: 0 0 3.2vh; }
+      .tool-row span {
+        flex: 1;
+        padding: 1.1vh .5vw;
+        border: 1px solid rgba(255,255,255,.22);
+        color: rgba(255,255,255,.73);
+        text-align: center;
+        font: 500 1.35vw/1 'DM Mono', monospace;
+        letter-spacing: .06em;
+      }
+      .promise {
+        position: absolute;
+        right: 6.7vw;
+        bottom: 9.3vh;
+        left: 6.7vw;
+        max-width: 88vw;
+        margin: 0;
+        color: rgba(255,255,255,.76);
+        font: 500 2.65vw/1.3 'Manrope', sans-serif;
+      }
+      .cta {
+        position: absolute;
+        right: 6.7vw;
+        bottom: 3.2vh;
+        left: 6.7vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 1.6vh;
+        border-top: 1px solid rgba(255,255,255,.25);
+        font: 500 1.8vw/1 'DM Mono', monospace;
+        letter-spacing: .04em;
+      }
+      .cta strong { color: #d9ff52; font-size: 2.2vw; }
+      .streak { position: absolute; width: 72vw; height: 2px; background: linear-gradient(90deg, transparent, #ff4fa3, transparent); filter: drop-shadow(0 0 10px #ff4fa3); transform: rotate(-35deg); opacity: .55; }
+      .streak.one { top: 38%; right: -24%; }
+      .streak.two { bottom: 12%; left: -26%; background: linear-gradient(90deg, transparent, #78c8ff, transparent); }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <div class="streak one"></div><div class="streak two"></div>
+      <div class="brand"><div class="mark">A<span>✦</span></div><div>AFTERGLOW<br /><em>AUTOMATIONS</em></div></div>
+      <p class="eyebrow">THE BUSINESS BEHIND THE PARTY</p>
+      <h1>One command center.<br /><i>Every signal.</i></h1>
+      <figure class="dashboard"><img src="/images/afterglow-dashboard-full.png" alt="Afterglow command center dashboard" /></figure>
+      <div class="tool-row">{tools.map((tool) => <span>{tool}</span>)}</div>
+      <p class="promise"><strong>Custom-built around your business.</strong><br />See what needs attention. Automate what happens next.</p>
+      <div class="cta"><strong>BUILD YOUR COMMAND CENTER →</strong><span>afterglowautomations.com</span></div>
+    </main>
+  </body>
+</html>

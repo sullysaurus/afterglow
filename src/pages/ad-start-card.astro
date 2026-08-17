@@ -1,0 +1,107 @@
+---
+const tools = [
+  { name: 'HoneyBook', group: 'BOOKINGS + CRM', tone: 'pink' },
+  { name: 'Check Cherry', group: 'BOOKINGS + CRM', tone: 'lime' },
+  { name: 'Google Ads', group: 'PAID GROWTH', tone: 'coral' },
+  { name: 'Google Analytics', group: 'WEBSITE BEHAVIOR', tone: 'aqua' },
+  { name: 'Search Console', group: 'ORGANIC SEARCH', tone: 'lime' },
+  { name: 'Content + SEO', group: 'CONTENT ENGINE', tone: 'pink' },
+  { name: 'Email + SMS', group: 'FOLLOW-UP', tone: 'aqua' },
+  { name: 'QuickBooks', group: 'MONEY', tone: 'coral' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Afterglow Automations Ad Start Card</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Manrope:wght@500;700&family=Unbounded:wght@600;700&display=swap');
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+      astro-dev-toolbar { display: none !important; }
+      body { background: #08060b; color: #f7f3ec; }
+      .card {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        padding: 6.2vh 6.7vw;
+        background:
+          radial-gradient(circle at 50% 51%, rgba(255,79,163,.17), transparent 29%),
+          radial-gradient(circle at 6% 18%, rgba(120,200,255,.12), transparent 28%),
+          #08060b;
+      }
+      .card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: .1;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitchTiles'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+      }
+      .kicker { margin: 0; color: #d9ff52; font: 500 1.8vw/1 'DM Mono', monospace; letter-spacing: .13em; }
+      h1 { margin: 2.4vh 0 0; font: 700 7.4vw/.96 'Unbounded', sans-serif; letter-spacing: -.06em; text-transform: uppercase; }
+      h1 i { color: #ff4fa3; font: italic 400 8.2vw/.9 Georgia, serif; text-transform: none; }
+      .stage { position: absolute; inset: 28vh 4.8vw 15vh; }
+      .orbit { position: absolute; inset: 11% 11% 9%; border: 1px solid rgba(255,255,255,.11); border-radius: 50%; transform: rotate(-8deg); }
+      .orbit.two { inset: 25% 25% 23%; transform: rotate(19deg); border-color: rgba(217,255,82,.16); }
+      .core {
+        position: absolute;
+        left: 50%; top: 50%;
+        width: 30vw; height: 30vw;
+        transform: translate(-50%,-50%) rotate(-4deg);
+        display: grid; place-items: center;
+        border: 2px solid #ff4fa3;
+        background: radial-gradient(circle, rgba(255,79,163,.23), rgba(9,7,12,.95) 62%);
+        box-shadow: 0 0 9vw rgba(255,79,163,.32), inset 0 0 5vw rgba(217,255,82,.07);
+      }
+      .core::before, .core::after { content: ''; position: absolute; inset: -7vw; border: 2px solid rgba(120,200,255,.28); border-radius: 50%; }
+      .core::after { inset: -13vw; border-color: rgba(217,255,82,.15); }
+      .core strong { font: 700 10vw/1 'Unbounded', sans-serif; text-shadow: 0 0 3vw #ff4fa3; }
+      .core strong span { position: absolute; color: #d9ff52; font-size: 3.5vw; transform: translate(-1vw,-1vw); }
+      .core small { position: absolute; bottom: 4.2vw; color: #ff4fa3; font: 500 1.45vw/1 'DM Mono', monospace; letter-spacing: .12em; }
+      .tool {
+        --accent: #ff4fa3;
+        position: absolute;
+        z-index: 2;
+        width: 37vw;
+        padding: 2.4vh 2.5vw;
+        border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+        background: rgba(18,15,23,.92);
+        box-shadow: 0 0 4vw color-mix(in srgb, var(--accent) 12%, transparent);
+      }
+      .tool::after { content: ''; position: absolute; width: 11vw; height: 1px; top: 50%; background: linear-gradient(90deg, var(--accent), transparent); }
+      .tool:nth-of-type(odd)::after { left: 100%; }
+      .tool:nth-of-type(even)::after { right: 100%; transform: rotate(180deg); }
+      .tool b { display: block; font: 600 2.6vw/1.1 'Unbounded', sans-serif; letter-spacing: -.035em; }
+      .tool span { display: block; margin-top: .9vh; color: var(--accent); font: 500 1.25vw/1 'DM Mono', monospace; letter-spacing: .11em; }
+      .pink { --accent: #ff4fa3; } .lime { --accent: #d9ff52; } .coral { --accent: #ff6a3d; } .aqua { --accent: #78e4d3; }
+      .tool:nth-of-type(1) { left: 0; top: 2%; transform: rotate(-2deg); }
+      .tool:nth-of-type(2) { right: 0; top: 8%; transform: rotate(2deg); }
+      .tool:nth-of-type(3) { left: 0; top: 27%; transform: rotate(1deg); }
+      .tool:nth-of-type(4) { right: 0; top: 34%; transform: rotate(-1deg); }
+      .tool:nth-of-type(5) { left: 0; bottom: 31%; transform: rotate(-1deg); }
+      .tool:nth-of-type(6) { right: 0; bottom: 24%; transform: rotate(2deg); }
+      .tool:nth-of-type(7) { left: 0; bottom: 7%; transform: rotate(1deg); }
+      .tool:nth-of-type(8) { right: 0; bottom: 1%; transform: rotate(-2deg); }
+      .footer { position: absolute; right: 6.7vw; bottom: 5.5vh; left: 6.7vw; padding-top: 2vh; border-top: 1px solid rgba(255,255,255,.24); color: rgba(255,255,255,.72); font: 500 2vw/1.3 'DM Mono', monospace; letter-spacing: .04em; }
+      .footer strong { color: #d9ff52; }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <p class="kicker">YOUR TOOLS AREN’T THE PROBLEM.</p>
+      <h1>They just need<br /><i>one brain.</i></h1>
+      <section class="stage">
+        <div class="orbit"></div><div class="orbit two"></div>
+        {tools.map((tool) => <article class={`tool ${tool.tone}`}><b>{tool.name}</b><span>{tool.group}</span></article>)}
+        <div class="core"><strong>A<span>✦</span></strong><small>AFTERGLOW CORE</small></div>
+      </section>
+      <p class="footer"><strong>CONNECTED.</strong> ORGANIZED. READY TO ACT.</p>
+    </main>
+  </body>
+</html>
