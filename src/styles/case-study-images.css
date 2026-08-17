@@ -1,0 +1,10 @@
+.southern-case-image {
+  background:
+    radial-gradient(circle at 75% 30%, rgba(217, 255, 82, 0.06), transparent 38%),
+    #050605;
+}
+
+.southern-case-image img {
+  object-fit: contain;
+  object-position: center;
+}
