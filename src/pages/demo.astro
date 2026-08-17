@@ -1,0 +1,275 @@
+---
+import '../styles/demo-dashboard.css';
+
+const sourceGroups = [
+  {
+    label: 'BOOKINGS + CRM',
+    tone: 'pink',
+    tools: [
+      { name: 'HoneyBook', path: 'BRIDGE' },
+      { name: 'Check Cherry', path: 'API + HOOKS' },
+      { name: 'Tripleseat', path: 'API + HOOKS' },
+      { name: 'Dubsado', path: 'BRIDGE' },
+    ],
+  },
+  {
+    label: 'MONEY',
+    tone: 'lime',
+    tools: [
+      { name: 'QuickBooks', path: 'API' },
+      { name: 'Stripe', path: 'API + HOOKS' },
+      { name: 'Square', path: 'API + HOOKS' },
+    ],
+  },
+  {
+    label: 'MARKETING',
+    tone: 'orange',
+    tools: [
+      { name: 'Google Ads', path: 'API' },
+      { name: 'GA4', path: 'DATA API' },
+      { name: 'Search Console', path: 'API' },
+      { name: 'Meta Ads', path: 'API' },
+    ],
+  },
+  {
+    label: 'OPERATIONS',
+    tone: 'aqua',
+    tools: [
+      { name: 'Google Calendar', path: 'API' },
+      { name: 'Google Sheets', path: 'API' },
+      { name: 'Slack', path: 'API' },
+      { name: 'Mailchimp', path: 'API' },
+    ],
+  },
+];
+
+const metrics = [
+  { label: 'New leads', value: '47', detail: '+18% vs prior period', tone: 'pink' },
+  { label: 'Median response', value: '8m', detail: 'Goal: under 15 minutes', tone: 'lime' },
+  { label: 'Booked revenue', value: '$84.6k', detail: '12 confirmed events', tone: 'aqua' },
+  { label: 'Collected', value: '$52.9k', detail: '63% of booked revenue', tone: 'aqua' },
+  { label: 'Blended ROAS', value: '5.8×', detail: '$4.8k tracked spend', tone: 'orange' },
+  { label: 'Events ahead', value: '18', detail: 'Next 30 days', tone: 'lime' },
+];
+
+const actions = [
+  { priority: 'NOW', title: 'Respond to 4 qualified inquiries', detail: 'Oldest has waited 38 minutes · $9.4k potential', source: 'CRM', tone: 'pink' },
+  { priority: 'TODAY', title: 'Follow up on 3 viewed proposals', detail: 'All opened twice · combined value $12.8k', source: 'AUTOMATION', tone: 'lime' },
+  { priority: 'WATCH', title: 'Saturday capacity is at 86%', detail: 'Two overlapping requests need equipment review', source: 'CALENDAR', tone: 'aqua' },
+  { priority: 'FIX', title: 'Brand campaign cost rose 21%', detail: 'Suggested budget guardrail is ready for approval', source: 'GOOGLE ADS', tone: 'orange' },
+];
+
+const channels = [
+  { name: 'Google Ads', leads: 16, bookings: 5, revenue: '$28.4k', width: 88, tone: 'orange' },
+  { name: 'Organic search', leads: 13, bookings: 4, revenue: '$22.1k', width: 70, tone: 'lime' },
+  { name: 'Referrals', leads: 9, bookings: 3, revenue: '$19.7k', width: 61, tone: 'aqua' },
+  { name: 'Instagram', leads: 6, bookings: 1, revenue: '$7.2k', width: 33, tone: 'pink' },
+];
+
+const connectors = sourceGroups.flatMap((group) => group.tools.map((tool) => ({ ...tool, group: group.label, tone: group.tone })));
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#070709" />
+    <link rel="icon" href="/brand/afterglow-mark.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap" rel="stylesheet" />
+    <title>Afterglow Live Owner View — Demo</title>
+  </head>
+  <body>
+    <div class="demo-app">
+      <aside class="demo-rail">
+        <a class="demo-brand" href="/" aria-label="Afterglow Automations home">
+          <img src="/brand/afterglow-mark.svg" alt="" />
+          <span>AFTERGLOW<em>AUTOMATIONS</em></span>
+        </a>
+
+        <nav class="demo-nav" aria-label="Dashboard sections">
+          <a class="active" href="#overview"><span>01</span>Owner view</a>
+          <a href="#signals"><span>02</span>Signal layer</a>
+          <a href="#actions"><span>03</span>Next moves <b>4</b></a>
+          <a href="#growth"><span>04</span>Growth</a>
+          <a href="#connections"><span>05</span>Connections <i></i></a>
+        </nav>
+
+        <div class="rail-stack">
+          <p>CONNECTED STACK</p>
+          <div class="rail-stack-list">
+            <span><i class="dot dot-pink"></i>Bookings + CRM <b>4</b></span>
+            <span><i class="dot dot-lime"></i>Money <b>3</b></span>
+            <span><i class="dot dot-orange"></i>Marketing <b>4</b></span>
+            <span><i class="dot dot-aqua"></i>Operations <b>4</b></span>
+          </div>
+          <small><i class="status-pulse"></i>15 sources healthy</small>
+        </div>
+
+        <div class="rail-footer">
+          <div class="owner-avatar">AA</div>
+          <div><strong>Afterglow Demo Co.</strong><span>Fictional workspace</span></div>
+        </div>
+      </aside>
+
+      <main class="demo-main" id="overview">
+        <header class="demo-topbar">
+          <div><span>MON, AUG 17</span><i></i><span>LIVE OWNER VIEW</span></div>
+          <div class="topbar-actions">
+            <span class="demo-note">FICTIONAL DATA</span>
+            <button class="tour-button" type="button"><i></i><span>Start guided tour</span></button>
+          </div>
+        </header>
+
+        <div class="demo-canvas">
+          <section class="command-header tour-target" data-tour="One clear answer before the day gets busy">
+            <div>
+              <p class="micro-label"><span></span>OWNER OVERVIEW / LIVE SIGNALS</p>
+              <h1>Your whole business.<br/><em>Finally in sync.</em></h1>
+              <p class="command-subtitle">The systems your team already uses—translated into priorities, performance, and the next best move.</p>
+            </div>
+            <div class="command-controls">
+              <div class="period-switcher" role="group" aria-label="Reporting period">
+                <button type="button" data-period="7">7D</button>
+                <button class="active" type="button" data-period="30">30D</button>
+                <button type="button" data-period="90">90D</button>
+              </div>
+              <div class="sync-stamp"><i class="status-pulse"></i><span>ALL SYSTEMS SYNCED<small>Last refresh · 2 min ago</small></span></div>
+            </div>
+          </section>
+
+          <section class="signal-layer tour-target" id="signals" data-tour="Every source flows through one governed data layer">
+            <div class="panel-heading">
+              <div><p class="micro-label">THE SIGNAL LAYER</p><h2>Use what you already use.</h2></div>
+              <div class="path-legend"><span><i class="legend-api"></i>Direct API</span><span><i class="legend-hook"></i>API + webhooks</span><span><i class="legend-bridge"></i>Automation bridge</span></div>
+            </div>
+            <div class="signal-grid">
+              {sourceGroups.map((group, index) => (
+                <div class={`source-cluster source-${group.tone} cluster-${index + 1}`}>
+                  <p>{group.label}</p>
+                  <div>{group.tools.map((tool) => <span><b>{tool.name}</b><small>{tool.path}</small></span>)}</div>
+                </div>
+              ))}
+              <div class="afterglow-core">
+                <div class="core-orbit"><span></span><span></span><span></span><span></span></div>
+                <img src="/brand/afterglow-mark.svg" alt="" />
+                <strong>AFTERGLOW</strong>
+                <small>DATA + ACTION LAYER</small>
+              </div>
+              <div class="signal-beam beam-left"><i></i></div>
+              <div class="signal-beam beam-right"><i></i></div>
+            </div>
+          </section>
+
+          <section class="metric-grid tour-target" aria-label="Key business metrics" data-tour="Revenue, demand, and delivery in the same reporting window">
+            {metrics.map((metric) => (
+              <article class={`metric metric-${metric.tone}`}>
+                <p>{metric.label}</p>
+                <strong>{metric.value}</strong>
+                <span>{metric.detail}</span>
+              </article>
+            ))}
+          </section>
+
+          <div class="lower-grid">
+            <section class="action-panel tour-target" id="actions" data-tour="The dashboard turns information into ranked next moves">
+              <div class="panel-heading compact">
+                <div><p class="micro-label">OWNER BRIEF</p><h2>What needs attention now</h2></div>
+                <span class="brief-count">4 OPEN MOVES</span>
+              </div>
+              <div class="action-list">
+                {actions.map((action) => (
+                  <article class={`action-row action-${action.tone}`}>
+                    <span class="priority">{action.priority}</span>
+                    <div><strong>{action.title}</strong><p>{action.detail}</p></div>
+                    <span class="source">{action.source}</span>
+                    <button type="button" aria-label={`Open ${action.title}`}>↗</button>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section class="growth-panel tour-target" id="growth" data-tour="Marketing is measured against bookings—not just clicks">
+              <div class="panel-heading compact">
+                <div><p class="micro-label">CLOSED-LOOP GROWTH</p><h2>From attention to revenue</h2></div>
+                <span class="period-label">LAST <b>30</b> DAYS</span>
+              </div>
+              <div class="growth-summary">
+                <div><span>Tracked pipeline</span><strong>$127.4k</strong></div>
+                <div><span>Booked from marketing</span><strong>$57.7k</strong></div>
+              </div>
+              <div class="channel-list">
+                {channels.map((channel) => (
+                  <div class={`channel channel-${channel.tone}`}>
+                    <div><strong>{channel.name}</strong><span>{channel.leads} leads · {channel.bookings} booked</span></div>
+                    <div class="channel-bar"><i style={`width:${channel.width}%`}></i></div>
+                    <b>{channel.revenue}</b>
+                  </div>
+                ))}
+              </div>
+              <div class="attribution-chain" aria-label="Attribution chain">
+                <span>CLICK</span><i>→</i><span>INQUIRY</span><i>→</i><span>PROPOSAL</span><i>→</i><span>BOOKING</span><i>→</i><strong>REVENUE</strong>
+              </div>
+            </section>
+          </div>
+
+          <section class="connection-registry tour-target" id="connections" data-tour="Each connector has an honest, supportable integration path">
+            <div class="panel-heading">
+              <div><p class="micro-label">CONNECTION REGISTRY</p><h2>Recognizable tools. Real integration paths.</h2></div>
+              <p class="registry-copy">Connect only what the business uses. Capabilities depend on account plan, permissions, and vendor approval.</p>
+            </div>
+            <div class="connector-grid">
+              {connectors.map((connector) => (
+                <article class={`connector connector-${connector.tone}`}>
+                  <span class="connector-mark">{connector.name.slice(0, 2).toUpperCase()}</span>
+                  <div><strong>{connector.name}</strong><small>{connector.group}</small></div>
+                  <b>{connector.path}</b>
+                  <i></i>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <footer class="demo-footer">
+            <span>AFTERGLOW AUTOMATIONS · EVENT BUSINESS COMMAND CENTERS</span>
+            <span>DEMO WORKSPACE · ALL NAMES + FIGURES ARE FICTIONAL</span>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <div class="tour-toast" role="status" aria-live="polite"><span>01</span><p>One clear answer before the day gets busy</p></div>
+
+    <script>
+      const periodButtons = document.querySelectorAll('[data-period]');
+      const periodLabel = document.querySelector('.period-label b');
+      periodButtons.forEach((button) => button.addEventListener('click', () => {
+        periodButtons.forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        if (periodLabel) periodLabel.textContent = button.getAttribute('data-period') || '30';
+      }));
+
+      const tourButton = document.querySelector('.tour-button');
+      const tourButtonLabel = tourButton?.querySelector('span');
+      const targets = [...document.querySelectorAll('.tour-target')];
+      const toast = document.querySelector('.tour-toast');
+      const toastStep = toast?.querySelector('span');
+      const toastText = toast?.querySelector('p');
+      let tourIndex = -1;
+
+      tourButton?.addEventListener('click', () => {
+        targets.forEach((target) => target.classList.remove('tour-active'));
+        tourIndex = (tourIndex + 1) % targets.length;
+        const target = targets[tourIndex];
+        target.classList.add('tour-active');
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (toastStep) toastStep.textContent = String(tourIndex + 1).padStart(2, '0');
+        if (toastText) toastText.textContent = target.getAttribute('data-tour') || '';
+        toast?.classList.add('visible');
+        if (tourButtonLabel) tourButtonLabel.textContent = tourIndex === targets.length - 1 ? 'Restart guided tour' : 'Next highlight';
+      });
+    </script>
+  </body>
+</html>
