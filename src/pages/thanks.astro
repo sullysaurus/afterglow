@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/contact-form.css';
+---
+<Layout title="Message received — Afterglow Automations" description="Thanks for contacting Afterglow Automations.">
+  <section class="thanks-page">
+    <p class="eyebrow">MESSAGE RECEIVED ✦</p>
+    <h1>Your next move<br/><i>is in motion.</i></h1>
+    <p>Thanks for reaching out. I’ll read through the details and reply personally—usually within one business day.</p>
+    <a href="/">BACK TO AFTERGLOW <span>↗</span></a>
+  </section>
+</Layout>
+
+<style>
+  .thanks-page { min-height: calc(100vh - 96px); padding: clamp(80px, 12vw, 180px) clamp(24px, 8vw, 130px); background: radial-gradient(circle at 80% 25%, rgba(255,79,163,.2), transparent 30%); }
+  .thanks-page .eyebrow { color: var(--lime); }
+  .thanks-page h1 { max-width: 1100px; margin: 26px 0; font: 600 clamp(48px, 8vw, 118px)/.94 var(--display); letter-spacing: -.06em; text-transform: uppercase; }
+  .thanks-page h1 i { font-family: Georgia, serif; font-weight: 400; text-transform: none; }
+  .thanks-page > p:not(.eyebrow) { max-width: 650px; color: rgba(255,255,255,.7); font-size: 20px; line-height: 1.65; }
+  .thanks-page > a { display: inline-flex; gap: 28px; margin-top: 28px; padding-bottom: 8px; border-bottom: 1px solid; font: 500 11px var(--mono); text-decoration: none; }
+  .thanks-page > a span { color: var(--pink); }
+</style>

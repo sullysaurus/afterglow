@@ -1,0 +1,151 @@
+.contact-intro,
+.contact-form,
+.contact > small {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-intro > p:not(.eyebrow) {
+  max-width: 680px;
+  margin: 25px auto 45px;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.contact-form {
+  width: min(920px, 100%);
+  margin: 0 auto 26px;
+  padding: clamp(26px, 4vw, 52px);
+  background: var(--ink);
+  color: #fff;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, .18);
+  box-shadow: 18px 18px 0 rgba(244, 240, 231, .28);
+}
+
+.form-honeypot {
+  display: none;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 24px;
+}
+
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-form label > span {
+  color: var(--lime);
+  font: 500 10px var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 0;
+  padding: 13px 0;
+  background: transparent;
+  color: #fff;
+  font: 16px/1.45 var(--body);
+  outline: none;
+  transition: border-color .2s, background-color .2s;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.contact-form select {
+  color-scheme: dark;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, .38);
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: var(--pink);
+  background: rgba(255, 79, 163, .045);
+}
+
+.form-wide {
+  grid-column: 1 / -1;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 34px;
+}
+
+.form-footer button {
+  flex: none;
+  border: 0;
+  padding: 19px 24px;
+  background: var(--lime);
+  color: var(--ink);
+  font: 600 11px var(--mono);
+  letter-spacing: .05em;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.form-footer button span {
+  margin-left: 24px;
+  color: var(--pink);
+}
+
+.form-footer button:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 var(--pink);
+}
+
+.form-footer p {
+  margin: 0;
+  color: rgba(255, 255, 255, .52);
+  font: 10px/1.6 var(--mono);
+  text-transform: uppercase;
+}
+
+.contact > small a {
+  font-weight: 700;
+}
+
+@media (max-width: 650px) {
+  .contact-form {
+    box-shadow: 10px 10px 0 rgba(244, 240, 231, .28);
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .form-wide {
+    grid-column: auto;
+  }
+
+  .form-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .form-footer button {
+    width: 100%;
+  }
+}

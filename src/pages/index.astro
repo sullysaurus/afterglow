@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import '../styles/contact-form.css';
 ---
 <Layout title="Afterglow Automations — AI Command Centers for Event Businesses" description="Custom AI command centers, automation, SEO, and connected growth systems for photo booth companies and event businesses.">
   <section class="hero">
@@ -106,7 +107,54 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <section id="contact" class="contact">
-    <div class="contact-star">✦</div><p class="eyebrow">YOUR MOVE</p><h2>What’s stealing time<br/>from your <i>best work?</i></h2><p>Tell me the workflow, bottleneck, or growth goal you keep thinking about. I’ll give you an honest read on where AI—or simpler software—can help.</p><a href="mailto:danny@afterglowautomations.com?subject=Let’s talk about my event business">START A CONVERSATION <span>↗</span></a>
-    <small>Currently taking on a small number of event-business projects.</small>
+    <div class="contact-star">✦</div>
+    <div class="contact-intro">
+      <p class="eyebrow">YOUR MOVE</p>
+      <h2>What’s stealing time<br/>from your <i>best work?</i></h2>
+      <p>Tell me the workflow, bottleneck, or growth goal you keep thinking about. I’ll give you an honest read on where AI—or simpler software—can help.</p>
+    </div>
+    <form class="contact-form" name="event-business-inquiry" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="event-business-inquiry" />
+      <p class="form-honeypot"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
+      <div class="form-grid">
+        <label>
+          <span>Your name *</span>
+          <input type="text" name="name" autocomplete="name" required placeholder="Your name" />
+        </label>
+        <label>
+          <span>Email *</span>
+          <input type="email" name="email" autocomplete="email" required placeholder="you@company.com" />
+        </label>
+        <label>
+          <span>Company *</span>
+          <input type="text" name="company" autocomplete="organization" required placeholder="Your event business" />
+        </label>
+        <label>
+          <span>Type of business</span>
+          <select name="business-type">
+            <option value="">Choose one</option>
+            <option>Photo booth company</option>
+            <option>Wedding or event planner</option>
+            <option>DJ or entertainment company</option>
+            <option>Venue or catering company</option>
+            <option>Rental company</option>
+            <option>Other event business</option>
+          </select>
+        </label>
+        <label class="form-wide">
+          <span>Website</span>
+          <input type="url" name="website" autocomplete="url" placeholder="https://" />
+        </label>
+        <label class="form-wide">
+          <span>What would you like to fix or automate? *</span>
+          <textarea name="message" rows="5" required placeholder="Tell me what’s taking too much time, where leads get lost, or what you wish you could see in one place."></textarea>
+        </label>
+      </div>
+      <div class="form-footer">
+        <button type="submit">SEND MY DETAILS <span>↗</span></button>
+        <p>No sales maze. Danny reads every message and replies personally.</p>
+      </div>
+    </form>
+    <small>Prefer email? <a href="mailto:danny@afterglowautomations.com?subject=Let’s talk about my event business">danny@afterglowautomations.com</a></small>
   </section>
 </Layout>
